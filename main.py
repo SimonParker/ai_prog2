@@ -18,7 +18,7 @@ for pop in population_sizes:
     print(f"n{pop}_m{mut * 100}")
     individuals_list = []
     trials = [] #contains the final generation (list) of each trial.
-    for i in range(5): #each combination of population size and mutation chance runs 3 times, highest final average fitness is chosen
+    for i in range(5): #each combination of population size and mutation chance runs 5 times, highest final average fitness is chosen
       iters = 0
       done = False
       individuals = []

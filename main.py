@@ -11,15 +11,14 @@ max_iters = 4000
 need to save the plots and individuals from each configuration
 '''
 
-#population_sizes = [10, 100, 500, 1000]
-#mutation_chances = [0.01, 0.05, 0.1, 0.3] #the chance to mutate each gene
-population_sizes = [100]
-mutation_chances = [0.1] #the chance to mutate each gene
+population_sizes = [10, 100, 500, 1000]
+mutation_chances = [0.01, 0.05, 0.1, 0.3] #the chance to mutate each gene
 for pop in population_sizes:
   for mut in mutation_chances:
+    print(f"n{pop}_m{mut * 100}")
     individuals_list = []
     trials = [] #contains the final generation (list) of each trial.
-    for i in range(3): #each combination of population size and mutation chance runs 3 times, highest final average fitness is chosen
+    for i in range(5): #each combination of population size and mutation chance runs 3 times, highest final average fitness is chosen
       iters = 0
       done = False
       individuals = []
@@ -43,21 +42,24 @@ for pop in population_sizes:
     max_index = results.index(min(results))
     best_trial = trials[max_index] #a list of tuples, each tuple is the fitness of a generation (average, best)
     best_individuals = individuals_list[max_index]
-    print(f"init: {best_individuals[0]}, final: {best_individuals[1]}")
     
     av_fitness = [x[0] for x in best_trial]
     best_fitness = [x[1] for x in best_trial]
     g = [x for x in range(len(best_trial))]
-    plt.plot(g, av_fitness, c='blue', label='Average')
-    plt.plot(g, best_fitness, c='red', label='Best')
+    plt.plot(g, av_fitness, c='blue', label='Average', linewidth=0.5)
+    plt.plot(g, best_fitness, c='red', label='Best', linewidth=0.5)
     plt.title(f"GA with population size {pop} and mutation chance {mut * 100}%")
     plt.xlabel("Generation #")
     plt.ylabel("Fitness")
     plt.legend()
     path = f"n{pop}_m{mut * 100}"
     plt.savefig(path + ".png")
+    plt.close()
+
     file = open(path + ".txt", 'w')
-    file.write(str(best_individuals) + "\n")
+    file.write(f"best initial state: {best_individuals[0]}\n")
+    file.write(f"best final state: {best_individuals[1]}\n")
+    file.write(f"achieved in {len(best_trial)} iterations\n")
     file.close()
 
     #plot best trial, save to disk

@@ -45,7 +45,6 @@ def randomly_sample(generation):
 
 #returns 2 children
 def crossover(p1, p2):
-  child = []
   cross_point = random.randint(1, 7)
   return State(p1.state[:cross_point] + p2.state[cross_point:]), State(p2.state[:cross_point] + p1.state[cross_point:])
 

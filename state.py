@@ -43,14 +43,14 @@ def randomly_sample(generation):
   fitnesses = [x[1] for x in generation]
   return random.choices(individuals, weights=fitnesses, k=2)
 
-#this returns 1 child. randomly choose 1 of the results from the crossover
+#returns 2 children
 def crossover(p1, p2):
   child = []
   cross_point = random.randint(1, 7)
   return State(p1.state[:cross_point] + p2.state[cross_point:]), State(p2.state[:cross_point] + p1.state[cross_point:])
 
 
-#the number of non-attacking pairs of queens, see slides
+#the number of non-attacking pairs of queens
 def heuristic(board):
   score = 0
   pos = [0, 1, 2, 3, 4, 5, 6, 7]

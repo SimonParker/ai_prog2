@@ -7,9 +7,6 @@ from state import *
 
 max_iters = 4000
 
-'''
-need to save the plots and individuals from each configuration
-'''
 
 population_sizes = [10, 100, 500, 1000]
 mutation_chances = [0.01, 0.05, 0.1, 0.3] #the chance to mutate each gene
@@ -22,14 +19,14 @@ for pop in population_sizes:
       iters = 0
       done = False
       individuals = []
-      generation_evals = [] #1000 long list of generational evaluations
+      generation_evals = []
       cur_generation = []
       for j in range(pop):
         board = rand_board()
         cur_generation.append((board, heuristic(board)))
       generation_evals.append(evaluate(cur_generation))
       individuals.append(best_individual(cur_generation))
-      while not done and iters < max_iters:
+      while iters < max_iters:
         if heuristic(best_individual(cur_generation)) == 28:
           break
         cur_generation = repopulate(cur_generation, mut) #returns a list of tuples 
@@ -62,7 +59,4 @@ for pop in population_sizes:
     file.write(f"achieved in {len(best_trial)} iterations\n")
     file.close()
 
-    #plot best trial, save to disk
-    #save the best_indivuals to disk as a text file or something
-    
 

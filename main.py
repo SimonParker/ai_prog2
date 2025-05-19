@@ -16,7 +16,7 @@ for pop in population_sizes:
     individuals_list = []
     trials = [] #contains the final generation (list) of each trial.
     for i in range(5): #each combination of population size and mutation chance runs 5 times, highest final average fitness is chosen
-      iters = 0
+      iters = -1 #fixing off by 1 issue
       done = False
       individuals = []
       generation_evals = []
